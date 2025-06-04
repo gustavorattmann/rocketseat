@@ -17,14 +17,18 @@ header {
 
 .boxText {
   display: flex;
-  font-size: 1.2rem;
-  font-weight: 900;
+  font-size: 1.24rem;
+  font-weight: bold;
 }
 
 .firstText {
   color: var(--blue);
+  display: flex;
+  align-items: flex-start;
 }
 
 .secondText {
   color: var(--purple-dark);
+  display: flex;
+  align-items: flex-start;
 }

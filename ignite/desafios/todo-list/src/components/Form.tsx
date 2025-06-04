@@ -1,5 +1,9 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
 
+import { PlusCircleIcon } from "@phosphor-icons/react";
+
+import styles from "./Form.module.css";
+
 export function Form() {
   const [textTask, setTextTask] = useState<string>("");
 
@@ -16,13 +20,16 @@ export function Form() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.formTask} onSubmit={handleSubmit}>
       <input
+        className={styles.inputTask}
         onChange={handleTextChange}
         value={textTask}
         placeholder="Adicione uma nova tarefa"
       />
-      <button type="submit">Criar</button>
+      <button className={styles.buttonTask} type="submit">
+        Criar <PlusCircleIcon size={16} />
+      </button>
     </form>
   );
 }
