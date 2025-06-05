@@ -31,18 +31,3 @@
   font-size: 0.75rem;
   font-weight: bold;
 }
-
-.contentEmpty {
-  padding: 4rem 1.5rem;
-  border: 1px solid var(--gray-400);
-  border-radius: 8px;
-  text-align: center;
-}
-
-.contentEmpty > img {
-  margin-bottom: 1.5rem;
-}
-
-.principalText {
-  font-weight: bold;
-}

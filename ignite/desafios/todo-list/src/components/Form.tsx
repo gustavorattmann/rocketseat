@@ -1,14 +1,37 @@
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import {
+  useState,
+  type ChangeEvent,
+  type Dispatch,
+  type FormEvent,
+  type SetStateAction,
+} from "react";
 
 import { PlusCircleIcon } from "@phosphor-icons/react";
 
 import styles from "./Form.module.css";
 
-export function Form() {
+import type { TaskList } from "./Task";
+interface FormProps {
+  tasks: TaskList[];
+  setTasks: Dispatch<SetStateAction<TaskList[]>>;
+}
+
+export function Form(props: FormProps) {
+  const { tasks, setTasks } = props;
+
   const [textTask, setTextTask] = useState<string>("");
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
+
+    setTasks([
+      ...tasks,
+      {
+        id: crypto.randomUUID(),
+        checked: false,
+        text: textTask,
+      },
+    ]);
 
     setTextTask("");
   }

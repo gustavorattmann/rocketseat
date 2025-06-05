@@ -1,0 +1,55 @@
+.contentList {
+  gap: 0.75rem;
+}
+
+.card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--gray-500);
+  border: 1px solid var(--gray-400);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.6);
+}
+
+.card p {
+  display: flex;
+  flex-grow: 1;
+  line-height: 140%;
+}
+
+.card button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--gray-300);
+  border-radius: 4px;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.card button:hover {
+  background: var(--gray-400);
+  color: var(--danger);
+}
+
+.boxInput {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.boxInput input[type="checkbox"] {
+  width: 1.25rem;
+  height: 1.25rem;
+  background: transparent;
+  border-radius: 50px;
+  border: 2px solid var(--blue);
+}

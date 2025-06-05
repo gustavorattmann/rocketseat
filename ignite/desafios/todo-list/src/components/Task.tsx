@@ -1,27 +1,58 @@
 import styles from "./Task.module.css";
 
-import clipboard from "../assets/clipboard.png";
+import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
 
-export function Task() {
+import { Card } from "./Card";
+import { EmptyTask } from "./EmptyTask";
+
+export interface TaskList {
+  id: string;
+  checked: boolean;
+  text: string;
+}
+
+interface TaskProps {
+  tasks: TaskList[];
+  setTasks: Dispatch<SetStateAction<TaskList[]>>;
+}
+
+export function Task(props: TaskProps) {
+  const { tasks, setTasks } = props;
+
+  const [countTaskCreated, setCountTaskCreated] = useState<number>(0);
+  const [countTaskClosed, setCountTaskClosed] = useState<string>("0");
+
+  useEffect(() => {
+    setCountTaskCreated(tasks?.length || 0);
+
+    const getAllChecked = tasks?.filter((elem) => elem?.checked);
+
+    setCountTaskClosed(
+      getAllChecked?.length && tasks?.length
+        ? `${getAllChecked.length} de ${tasks}`
+        : "0"
+    );
+  }, [tasks]);
+
   return (
     <div className={styles.boxTask}>
       <div className={styles.info}>
         <div>
           <p>Tarefas criadas</p>
-          <span>0</span>
+          <span>{countTaskCreated}</span>
         </div>
         <div>
           <p>Concluídas</p>
-          <span>0</span>
+          <span>{countTaskClosed}</span>
         </div>
       </div>
-      <div className={styles.contentEmpty}>
-        <img src={clipboard} alt="" />
-        <p className={styles.principalText}>
-          Você ainda não tem tarefas cadastradas
-        </p>
-        <p>Crie tarefas e organize seus itens a fazer</p>
-      </div>
+      {tasks?.length ? (
+        tasks.map((item) => (
+          <Card key={item.id} item={item} tasks={tasks} setTasks={setTasks} />
+        ))
+      ) : (
+        <EmptyTask />
+      )}
     </div>
   );
 }
