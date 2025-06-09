@@ -1,0 +1,118 @@
+.contentList {
+  gap: 0.75rem;
+}
+
+.card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--gray-500);
+  border: 1px solid var(--gray-400);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.6);
+}
+
+.card p {
+  display: flex;
+  flex-grow: 1;
+  line-height: 140%;
+  color: var(--gray-100);
+}
+
+.card .confirmed {
+  color: var(--gray-300);
+  text-decoration: line-through;
+}
+
+.card button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--gray-300);
+  border-radius: 4px;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.card button:hover {
+  background: var(--gray-400);
+  color: var(--danger);
+}
+
+.boxCheck {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.boxCheck label {
+  display: block;
+  position: relative;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.boxCheck input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 24px;
+  width: 24px;
+  background: transparent;
+  border: 3px solid var(--blue);
+  border-radius: 50%;
+}
+
+.boxCheck label:hover input ~ .checkmark {
+  background: var(--blue-dark);
+}
+
+.boxCheck input:checked ~ .checkmark {
+  background: var(--purple-dark);
+  border-color: var(--purple-dark);
+}
+
+.boxCheck label:hover input:checked ~ .checkmark {
+  background: var(--purple);
+  border-color: var(--purple);
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.boxCheck input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.boxCheck label > .checkmark:after {
+  left: 5px;
+  top: 1px;
+  height: 10px;
+  width: 5px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
