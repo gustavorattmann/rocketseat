@@ -11,12 +11,12 @@ export function App() {
   return (
     <div>
       <Header />
-      <main>
-        <div className={styles.wrapper}>
+      <div className={styles.wrapper}>
+        <main>
           <Form tasks={tasks} setTasks={setTasks} />
           <Task tasks={tasks} setTasks={setTasks} />
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 }

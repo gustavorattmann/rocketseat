@@ -3,6 +3,7 @@ import {
   type ChangeEvent,
   type Dispatch,
   type FormEvent,
+  type InvalidEvent,
   type SetStateAction,
 } from "react";
 
@@ -36,19 +37,25 @@ export function Form(props: FormProps) {
     setTextTask("");
   }
 
-  function handleTextChange(event: ChangeEvent<HTMLInputElement>) {
-    event.preventDefault();
-
+  function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
+    event.target.setCustomValidity("");
     setTextTask(event.target.value);
+  }
+
+  function handleNewTaskInvalid(event: InvalidEvent<HTMLInputElement>) {
+    event.target.setCustomValidity("Esse campo é obrigatório!");
   }
 
   return (
     <form className={styles.formTask} onSubmit={handleSubmit}>
       <input
         className={styles.inputTask}
-        onChange={handleTextChange}
+        onChange={handleNewTaskChange}
+        onInvalid={handleNewTaskInvalid}
         value={textTask}
         placeholder="Adicione uma nova tarefa"
+        name="task"
+        required
       />
       <button className={styles.buttonTask} type="submit">
         Criar <PlusCircleIcon size={16} />

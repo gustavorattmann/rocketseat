@@ -13,53 +13,63 @@ import {
 } from "react";
 
 interface CardProps {
-  item: TaskList;
+  id: string;
   tasks: TaskList[];
   setTasks: Dispatch<SetStateAction<TaskList[]>>;
 }
 
 export function Card(props: CardProps) {
-  const { item, tasks, setTasks } = props;
+  const { id, tasks, setTasks } = props;
 
+  const [textTask, setTextTask] = useState<string>("");
   const [checked, setChecked] = useState<boolean>(false);
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
-    setChecked(event.target.checked);
-
-    const getAllTasksExcludeEdited =
-      tasks?.filter((elem) => elem?.id !== item?.id) || [];
-
-    const addCheckedInTask =
-      tasks
-        ?.filter((elem) => elem?.id === item?.id)
-        ?.map((elem) => {
+    const taskChecked =
+      tasks?.map((elem) => {
+        if (elem?.id === event.currentTarget.id) {
           return {
             ...elem,
-            checked: event.target.checked,
+            checked: event.currentTarget.checked,
           };
-        }) || [];
+        }
 
-    if (addCheckedInTask?.length)
-      setTasks([...getAllTasksExcludeEdited, ...addCheckedInTask]);
+        return elem;
+      }) || [];
+
+    setTasks(taskChecked);
   }
 
   function handleDelete() {
-    const taskRemoved = tasks?.filter((elem) => elem?.id !== item?.id);
+    const taskRemoved = tasks?.filter((elem) => elem?.id !== id);
 
     setTasks(taskRemoved);
   }
 
   useEffect(() => {
-    setChecked(item?.checked);
-  }, [item]);
+    const taskChecked = tasks?.filter((elem) => elem?.id === id);
+
+    if (taskChecked?.length) {
+      setTextTask(taskChecked[0]?.text);
+      setChecked(taskChecked[0]?.checked);
+    }
+  }, [id, tasks]);
 
   return (
     <div className={styles.contentList}>
       <div className={styles.card}>
-        <div className={styles.boxInput}>
-          <input type="checkbox" checked={checked} onChange={handleChange} />
+        <div className={styles.boxCheck}>
+          <label htmlFor={id}>
+            <input
+              type="checkbox"
+              id={id}
+              checked={checked}
+              onChange={handleChange}
+            />
+            <span className={styles.checkmark}></span>
+          </label>
         </div>
-        <p>{item.text}</p>
+        <p className={checked ? styles.confirmed : ""}>{textTask}</p>
         <button type="button" onClick={handleDelete}>
           <TrashIcon size={20} />
         </button>

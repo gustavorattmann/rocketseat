@@ -29,7 +29,7 @@ export function Task(props: TaskProps) {
 
     setCountTaskClosed(
       getAllChecked?.length && tasks?.length
-        ? `${getAllChecked.length} de ${tasks}`
+        ? `${getAllChecked.length} de ${tasks.length}`
         : "0"
     );
   }, [tasks]);
@@ -48,7 +48,7 @@ export function Task(props: TaskProps) {
       </div>
       {tasks?.length ? (
         tasks.map((item) => (
-          <Card key={item.id} item={item} tasks={tasks} setTasks={setTasks} />
+          <Card key={item.id} id={item.id} tasks={tasks} setTasks={setTasks} />
         ))
       ) : (
         <EmptyTask />
