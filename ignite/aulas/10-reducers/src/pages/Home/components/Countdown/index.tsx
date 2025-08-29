@@ -3,7 +3,6 @@ import { CountdownContainer, Separator } from "./styles";
 import { differenceInSeconds } from "date-fns";
 import { CyclesContext } from "../../../../contexts/CyclesContent";
 
-
 export function Countdown() {
   const {
     activeCycle,
@@ -22,7 +21,7 @@ export function Countdown() {
       interval = setInterval(() => {
         const secondsDifference = differenceInSeconds(
           new Date(),
-          activeCycle.startDate
+          new Date(activeCycle.startDate)
         );
 
         if (secondsDifference >= totalSeconds) {
